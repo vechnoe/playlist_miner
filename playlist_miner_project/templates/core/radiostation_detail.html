@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load pagination_tags %}
+
+{% block title %}
+  {{ radiostation.name }} | Playlist miner
+{% endblock %}
+
+{% block content %}
+  <ol class="breadcrumb">
+    <li><a href="/" title="">Home</a></li>
+    <li class="active">{{ radiostation.name }}</li>
+  </ol>
+  <h2 class="page-header">{{ radiostation.name }}</h2>
+  <table class="table table-striped">
+    {% if airplay_list %}
+      <thead>
+        <th>Song title</th>
+        <th>Artist</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Count</th>
+        <th>Chart</th>
+        <th>Hit</th>
+      </thead>
+    {% endif %}
+    <tbody>
+      {% autopaginate airplay_list %}
+      {% for airplay in airplay_list %}
+      <tr>
+        <td>{{ airplay.song.title }}</td>
+        <td>{{ airplay.song.artist }}</td>
+        <td>{{ airplay.date|date:'d:m:Y' }}</td>
+        <td>{{ airplay.date|date:'H:i:s' }}</td>
+        <td>{{ airplay.song.get_airplay_count }}</td>
+        <td>
+          {%  if airplay.song.get_chart_dynamic == 0 %}
+            <span class="glyphicon glyphicon-minus"></span>
+          {%  elif airplay.song.get_chart_dynamic == -1 %}
+            <span class="glyphicon glyphicon-arrow-down"></span>
+          {%  elif airplay.song.get_chart_dynamic == 1 %}
+            <span class="glyphicon glyphicon-arrow-up"></span>
+          {% endif %}
+        </td>
+        <td>
+          {% if airplay.song.is_chart_hit %}
+            <span class="glyphicon glyphicon-star"></span>
+          {% else %}
+            <span class="glyphicon glyphicon-minus"></span>
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      No airplays
+    {% endfor %}
+    </tbody>
+  </table>
+  {% paginate %}
+{% endblock %}

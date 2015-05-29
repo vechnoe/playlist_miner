@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load pagination_tags %}
+
+{% block content %}
+  <ol class="breadcrumb">
+    <li class="active">Home</li>
+  </ol>
+  <h2 class="page-header">Playlist miner</h2>
+  <table class="table table-striped">
+    {% if object_list %}
+      <thead>
+      <th>Radiostation name</th>
+      <th>Url</th>
+      <th>Monitoring period</th>
+      <th></th>
+      </thead>
+    {% endif %}
+    <tbody>
+    {% autopaginate object_list %}
+    {% for radiostation in object_list %}
+      <tr>
+        <td>{{ radiostation.name }}</td>
+        <td><a href="{{ radiostation.url }}">{{ radiostation.url }}</a></td>
+        <td>{{ radiostation.period }} days</td>
+        <td>
+          <a type="button"
+             class="btn btn-primary"
+             href="{% url 'core:radiostation_detail' radiostation.pk %}">Detail view</a>
+        </td>
+      </tr>
+    {% empty %}
+      No radiostations
+    {% endfor %}
+    </tbody>
+  </table>
+  {% paginate %}
+{% endblock %}

@@ -1,0 +1,11 @@
+Django==1.8
+psycopg2==2.5.3
+django-bootstrap3==4.6.0
+django-pagination-bootstrap==1.0.7
+ipdb==0.8
+pytz
+python-dateutil==2.4.2
+redis
+celery
+django-celery
+feedparser

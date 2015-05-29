@@ -1,0 +1,12 @@
+*.pyc
+*~
+settings_local.py
+playlist_miner_project/media
+fabfile.py
+env/
+logs/*
+fabfile_settings.py*
+src/
+.idea/
+*.pid
+*.log
