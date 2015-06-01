@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'djcelery',
+    'bootstrap3',
     'pagination_bootstrap',
 
     'core',
@@ -67,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'playlist_miner_project.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
@@ -96,8 +97,16 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
+DATE_INPUT_FORMAT = '%d:%m:%Y'
+
+ACCEPTABLE_FORMATS = [
+    '%d-%m-%Y',
+    '%d/%m/%Y',
+    '%d/%m/%y',
+    '%d:%m:%Y'
+]
 
 
 # Static files (CSS, JavaScript, Images)

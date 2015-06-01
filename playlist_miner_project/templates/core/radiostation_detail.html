@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load pagination_tags %}
+{% load bootstrap3 %}
 
 {% block title %}
   {{ radiostation.name }} | Playlist miner
@@ -11,11 +12,56 @@
     <li class="active">{{ radiostation.name }}</li>
   </ol>
   <h2 class="page-header">{{ radiostation.name }}</h2>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Set monitoring period</div>
+    <div class="panel-body">
+      <div class="container">
+        <form  action="." method="post">
+          {% csrf_token %}
+          <div class='col-md-4'>
+            <div class="form-group">
+              <div class="input-group date datetimepicker">
+                <div class="input-group-addon">Begin</div>
+                <input type="text" class="form-control"
+                       id="id_begin_date" name="begin_date"
+                       value="{{ form.begin_date.value|date:'d:m:Y' }}"
+                       placeholder="{{ form.begin_date.value|date:'d:m:Y' }}"/>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="input-group date datetimepicker">
+                <div class="input-group-addon">End</div>
+                <input type="text"  class="form-control"
+                       id="id_end_date" name="end_date"
+                       value="{{ form.end_date.value|date:'d:m:Y'  }}"
+                       placeholder="{{ form.end_date.value|date:'d:m:Y' }}"/>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class='col-md-2'>
+            <div class="form-group">
+              <input type="submit"  class="btn btn-primary" value="Filter"/>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <table class="table table-striped">
     {% if airplay_list %}
       <thead>
-        <th>Song title</th>
         <th>Artist</th>
+        <th>Song title</th>
         <th>Date</th>
         <th>Time</th>
         <th>Count</th>
@@ -27,8 +73,8 @@
       {% autopaginate airplay_list %}
       {% for airplay in airplay_list %}
       <tr>
-        <td>{{ airplay.song.title }}</td>
         <td>{{ airplay.song.artist }}</td>
+        <td>{{ airplay.song.title }}</td>
         <td>{{ airplay.date|date:'d:m:Y' }}</td>
         <td>{{ airplay.date|date:'H:i:s' }}</td>
         <td>{{ airplay.song.get_airplay_count }}</td>
@@ -55,4 +101,12 @@
     </tbody>
   </table>
   {% paginate %}
+    <script>
+      $('.datetimepicker').datetimepicker(
+          {
+            format: 'DD:MM:YYYY'
+          }
+      );
+
+    </script>
 {% endblock %}
