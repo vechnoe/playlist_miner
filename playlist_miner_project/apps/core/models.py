@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from django.utils import timezone
 from django.db import models
@@ -24,7 +24,10 @@ class Radiostation(models.Model):
         """
         It returns monitoring period
         """
-        return (self.begin_date, self.end_date + timedelta(1))  # FIXME
+        return self.begin_date, self.end_date + timedelta(1)  # FIXME
+
+    def get_period_integrer(self):
+        return abs((self.end_date - self.begin_date).days)
 
     def get_airplay_filtered_set(self):
         """
