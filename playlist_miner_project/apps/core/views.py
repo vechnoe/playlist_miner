@@ -8,9 +8,11 @@ from django.views.generic.detail import SingleObjectMixin
 from core.models import Radiostation
 from core.forms import DateFilterForm
 
+
 class RadiostationListView(ListView):
     model = Radiostation
     template_name = 'core/radiostation_list.html'
+
 
 class RadiostationDetailView(SingleObjectMixin, FormView):
     template_name = 'core/radiostation_detail.html'

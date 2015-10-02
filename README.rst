@@ -6,10 +6,14 @@ Description
 Simple playlist miner. Receives data from the sites
 of radiostations, collects statistics.
 
+Demo
+----
+See: .. _`playlist-miner.dev.drevle.com`: http://playlist-miner.dev.drevle.com/
+
 TODO
 ----
 * Logger
-* Create parser from Dajngo admin
+* Create parser from Django admin
 * More statistics
 * Tests
     
