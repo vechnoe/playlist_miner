@@ -8,7 +8,7 @@ of radiostations, collects statistics.
 
 Demo
 ----
-See: .. _`playlist-miner.dev.drevle.com`: http://playlist-miner.dev.drevle.com/
+See: http://playlist-miner.dev.drevle.com/
 
 TODO
 ----
